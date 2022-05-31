@@ -1,11 +1,15 @@
 from curses import raw
 import redis
 import json
+import yaml
+
+with open("./env.yaml") as file:
+            evariables = yaml.safe_load(file)
 
 r = redis.StrictRedis(
-    host='192.168.15.88',  # из Endpoint
-    port=6379,  # из Endpoint
-    password='P@ssw0rd!'  # ваш пароль
+    host=evariables['redis']['ip'],  # из Endpoint
+    port=evariables['redis']['port'],  # из Endpoint
+    password=evariables['redis']['pass']  # ваш пароль
 )
 
 def get_data(query):

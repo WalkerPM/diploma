@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 import data_aggregation as dg
 import cache
+import yaml
 
 app = Flask(__name__)
 
@@ -23,4 +24,6 @@ def get_info():
     return jsonify(data)
 
 if __name__ == "__main__":
-    app.run()
+    with open("./env.yaml") as file:
+            evariables = yaml.safe_load(file)
+    app.run(host = evariables['server']['ip'], port=evariables['server']['port'], debug=False)

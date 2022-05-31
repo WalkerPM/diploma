@@ -1,9 +1,12 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
-
+import yaml
 import sys
 
-engine = create_engine(r'mariadb+mariadbconnector://api_user:Passw0rd@192.168.15.88:3306/migration')
+with open("./env.yaml") as file:
+            evariables = yaml.safe_load(file)
+
+engine = create_engine(r'mariadb+mariadbconnector://' + str(evariables['db']['user']) +':' + str(evariables['db']['pass']) + '@' + str(evariables['db']['ip']) + '/' + evariables['db']['db_name'])
 
 import models
 
