@@ -3,18 +3,18 @@ from sqlalchemy.orm import Session, sessionmaker
 
 import sys
 
-engine = create_engine('sqlite:///sqlite3.db')
+engine = create_engine(r'mariadb+mariadbconnector://api_user:Passw0rd@192.168.15.88:3306/migration')
 
 import models
 
 Session = sessionmaker(bind=engine)
 
-
-try:
-    engine.connect()
-except:
-    print("Connection to DB failed")
-    sys.exit(10)
+engine.connect()
+# try:
+    
+# except:
+#     print("Connection to DB failed")
+#     sys.exit(10)
 
 
 def get_data(url):
